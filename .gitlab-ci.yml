@@ -14,7 +14,8 @@ linux:
     - curl -sSL https://get.docker.com/ | sh
     - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
     - python -m pip install cibuildwheel==2.10.2
-    - cibuildwheel --output-dir wheelhouse
+    - git submodule update --init
+    - cibuildwheel --output-dir wheelhouse --platform linux --archs aarch64
   artifacts:
     paths:
       - wheelhouse/
