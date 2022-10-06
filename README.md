@@ -9,6 +9,9 @@ docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 pipx run cibuildwheel --platform linux --archs aarch64
 ```
 
+## Testing GitLab builds
+TODO: Import this project into GitLab
+
 ## Prerequisites
 
 * A compiler with C++11 support
