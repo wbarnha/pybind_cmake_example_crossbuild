@@ -22,7 +22,7 @@ test-command = "pytest {project}/tests"
 test-extras = ["test"]
 test-skip = ["*universal2:arm64"]
 # Setuptools bug causes collision between pypy and cpython artifacts
-before-build = "rm -rf {project}/build"
+
 
 skip = "*-win32 *-musllinux_x86_64 *i686*"
 build = "cp3*"
@@ -30,3 +30,15 @@ build = "cp3*"
 
 [tool.cibuildwheel.linux]
 archs = ["auto", "aarch64"]
+before-build = "rm -rf {project}/build"
+
+[tool.cibuildwheel.macos]
+before-build = "rm -rf {project}/build"
+
+# Use delvewheel on windows
+[tool.cibuildwheel.windows]
+before-build = [
+    "pip install delvewheel",
+    "if exist build rmdir /s /q build",
+]
+repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel}"
